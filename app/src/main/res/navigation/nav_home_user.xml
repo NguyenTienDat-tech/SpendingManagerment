@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_home_user"
+    app:startDestination="@id/transactionFragment">
+
+    <fragment
+        android:id="@+id/transactionFragment"
+        android:name="com.example.spendingmanagerment.ui.home_user.transaction.TransactionFragment"
+        android:label="@string/app_transaction">
+        <action
+            android:id="@+id/action_transaction_to_addTransaction"
+            app:destination="@id/addTransactionFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="com.example.spendingmanagerment.ui.home_user.stats.StatsFragment"
+        android:label="@string/app_statistics"/>
+
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.spendingmanagerment.ui.home_user.setting.SettingFragment"
+        android:label="@string/app_setting"/>
+
+    <dialog
+        android:id="@+id/addTransactionFragment"
+        android:name="com.example.spendingmanagerment.ui.home_user.addtransaction.AddTransactionFragment"
+        android:label="@string/add_transaction">
+        <argument
+            android:name="transactionId"
+            app:argType="long"
+            android:defaultValue="0L"/>
+        <argument
+            android:name="selectedDay"
+            app:argType="long"
+            android:defaultValue="0L"/>
+    </dialog>
+</navigation>
