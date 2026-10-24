@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_income">Thu nhập</string>
+    <string name="app_expense">Chi tiêu</string>
+    <string name="app_select_date">Chọn ngày</string>
+    <string name="app_amount">Số tiền</string>
+    <string name="app_category">Danh mục</string>
+    <string name="app_account">Tài khoản</string>
+    <string name="app_note">Ghi chú</string>
+    <string name="app_save">Lưu</string>
+    <string name="app_delete">Xóa</string>
+    <string name="app_name">Quản Lý Chi Tiêu</string>
+    <string name="dark_mode">Chế Độ Tối</string>
+    <string name="language">Ngôn Ngữ</string>
+    <string name="dark_mode_desc">Chuyển đổi giữa giao diện sáng và tối</string>
+    <string name="language_desc">Chọn ngôn ngữ cho ứng dụng</string>
+
+    <string name="app_total">Tổng</string>
+
+    <string name="app_transaction">Giao dịch</string>
+    <string name="app_statistics">Thống kê</string>
+    <string name="app_setting">Cài đặt</string>
+    <string name="app_more">Thêm</string>
+    <string name="app_export_excel">Xuất Excel</string>
+    <string name="app_import_excel">Nhập Excel</string>
+    <string name="app_clear_data">Xóa dữ liệu</string>
+    <string name="confirm_clear_data">Xóa tất cả giao dịch? Thao tác này không thể hoàn tác.</string>
+    <string name="confirm_import_excel">Nhập giao dịch từ file đã chọn? Giao dịch trùng ID sẽ được cập nhật; các giao dịch khác được giữ lại.</string>
+    <string name="excel_export_success">Đã xuất %1$d giao dịch.</string>
+    <string name="excel_import_success">Đã nhập %1$d giao dịch.</string>
+    <string name="clear_data_success">Đã xóa %1$d giao dịch.</string>
+    <string name="excel_export_error">Không thể xuất Excel. Vui lòng thử vị trí lưu khác.</string>
+    <string name="excel_import_error">Không thể nhập Excel. Hãy dùng file .xlsx có các cột ID, Type, Category, Account, Note, Date, Amount và số tiền VND nguyên hợp lệ.</string>
+    <string name="clear_data_error">Không thể xóa giao dịch. Vui lòng thử lại.</string>
+    <string name="import_action">Nhập</string>
+
+    <string name="app_daily">Ngày</string>
+    <string name="app_monthly">Tháng</string>
+    <string name="app_calendar">Chọn ngày</string>
+
+    <string name="add_transaction">Thêm giao dịch</string>
+    <string name="edit_transaction">Sửa giao dịch</string>
+    <string name="empty_transactions">Chưa có giao dịch trong kỳ này. Nhấn + để thêm.</string>
+    <string name="empty_statistics">Chưa có giao dịch trong kỳ này</string>
+    <string name="invalid_amount">Nhập số tiền VND nguyên từ 1 đến 999.999.999.999</string>
+    <string name="required_fields">Vui lòng chọn danh mục và tài khoản</string>
+    <string name="database_error">Không thể lưu thay đổi. Vui lòng thử lại.</string>
+    <string name="transaction_missing">Giao dịch này không còn tồn tại</string>
+    <string name="confirm_delete">Xóa giao dịch này?</string>
+    <string name="cancel">Hủy</string>
+    <string name="previous_date">Kỳ trước</string>
+    <string name="next_date">Kỳ sau</string>
+    <string name="stats_total">Tổng: %1$s</string>
+    <string-array name="categories">
+        <item>Lương</item>
+        <item>Kinh doanh</item>
+        <item>Đầu tư</item>
+        <item>Khoản vay</item>
+        <item>Thuê nhà</item>
+        <item>Khác</item>
+    </string-array>
+    <string-array name="accounts">
+        <item>Tiền mặt</item>
+        <item>Ngân hàng</item>
+        <item>MB Bank</item>
+        <item>Viettel Money</item>
+        <item>Khác</item>
+    </string-array>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SpendingNavigationIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">#426DB0</item>
+    </style>
+    <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15sp</item> <!-- Tăng kích thước văn bản -->
+        <item name="android:textStyle">bold</item> <!-- In đậm nếu cần -->
+    </style>
+
+    <style name="RoundedFAB" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item> <!-- Đảm bảo các góc được bo tròn -->
+    </style>
+
+
+</resources>

@@ -1,3 +1,61 @@
 <resources>
-    <string name="app_name">SpendingManagerment</string>
+    <string name="app_name">Spending_Management</string>
+
+    <string name="app_income">Income</string>
+    <string name="app_expense">Expense</string>
+    <string name="app_select_date">Select date</string>
+    <string name="app_amount">Amount</string>
+    <string name="app_category">Category</string>
+    <string name="app_account">Account</string>
+    <string name="app_note">Note</string>
+    <string name="app_save">Save</string>
+    <string name="app_delete">Delete</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="dark_mode_desc">Switch between light and dark themes</string>
+    <string name="language">Language</string>
+    <string name="language_desc">Choose the app\'s language</string>
+
+    <string name="app_total">Total</string>
+
+    <string name="app_transaction">Transaction</string>
+    <string name="app_statistics">Statistics</string>
+    <string name="app_setting">Setting</string>
+    <string name="app_more">More</string>
+    <string name="app_export_excel">Export Excel</string>
+    <string name="app_import_excel">Import Excel</string>
+    <string name="app_clear_data">Clear data</string>
+    <string name="confirm_clear_data">Delete all transactions? This action cannot be undone.</string>
+    <string name="confirm_import_excel">Import transactions from the selected file? Matching IDs will be updated; other transactions will be kept.</string>
+    <string name="excel_export_success">Exported %1$d transactions.</string>
+    <string name="excel_import_success">Imported %1$d transactions.</string>
+    <string name="clear_data_success">Deleted %1$d transactions.</string>
+    <string name="excel_export_error">Unable to export Excel. Please try another location.</string>
+    <string name="excel_import_error">Unable to import Excel. Use an .xlsx file with the columns ID, Type, Category, Account, Note, Date, Amount and valid whole VND amounts.</string>
+    <string name="clear_data_error">Unable to delete transactions. Please try again.</string>
+    <string name="import_action">Import</string>
+
+    <string name="app_daily">Daily</string>
+    <string name="app_monthly">Monthly</string>
+    <string name="app_calendar">Calendar</string>
+
+    <string name="add_transaction">Add transaction</string>
+    <string name="edit_transaction">Edit transaction</string>
+    <string name="empty_transactions">No transactions for this period. Tap + to add one.</string>
+    <string name="empty_statistics">No transactions for this period</string>
+    <string name="invalid_amount">Enter a whole VND amount from 1 to 999,999,999,999</string>
+    <string name="required_fields">Choose a category and an account</string>
+    <string name="database_error">Unable to save changes. Please try again.</string>
+    <string name="transaction_missing">This transaction no longer exists</string>
+    <string name="confirm_delete">Delete this transaction?</string>
+    <string name="cancel">Cancel</string>
+    <string name="previous_date">Previous period</string>
+    <string name="next_date">Next period</string>
+    <string name="stats_total">Total: %1$s</string>
+    <string name="signed_amount" translatable="false">%1$s%2$s</string>
+    <string-array name="categories">
+        <item>Salary</item><item>Business</item><item>Investment</item><item>Loan</item><item>Rent</item><item>Other</item>
+    </string-array>
+    <string-array name="accounts">
+        <item>Cash</item><item>Bank</item><item>MB Bank</item><item>Viettel Money</item><item>Other</item>
+    </string-array>
 </resources>
