@@ -15,12 +15,7 @@ public final class TransactionOptions {
         return label(resources.getStringArray(R.array.accounts), ACCOUNTS, code);
     }
     private static String label(String[] labels, String[] codes, String code) {
-        int optionCount = Math.min(labels.length, codes.length);
-        for (int i = 0; i < optionCount; i++) {
-            if (codes[i].equals(code)) {
-                return labels[i];
-            }
-        }
+        for (int i = 0; i < codes.length; i++) if (codes[i].equals(code)) return labels[i];
         return code;
     }
 }

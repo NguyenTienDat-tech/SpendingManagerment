@@ -16,18 +16,6 @@ import javax.inject.Inject;
 
 @HiltViewModel
 public class AddTransactionViewModel extends ViewModel {
-    private static final String KEY_TRANSACTION_ID = "transactionId";
-    private static final String KEY_SELECTED_DAY = "selectedDay";
-    private static final String KEY_DRAFT_LOADED = "draftLoaded";
-    private static final String KEY_DATE = "date";
-    private static final String KEY_AMOUNT = "amount";
-    private static final String KEY_TYPE = "type";
-    private static final String KEY_CATEGORY = "category";
-    private static final String KEY_ACCOUNT = "account";
-    private static final String KEY_NOTE = "note";
-
-    private static final long MAX_AMOUNT = 999_999_999_999L;
-
     private final TransactionRepository repository;
     private final SavedStateHandle savedStateHandle;
 
@@ -46,15 +34,15 @@ public class AddTransactionViewModel extends ViewModel {
         this.repository = repository;
         this.savedStateHandle = savedStateHandle;
 
-        Long transactionId = savedStateHandle.get(KEY_TRANSACTION_ID);
+        Long transactionId = savedStateHandle.get("transactionId");
         id = transactionId == null ? 0 : transactionId;
 
-        if (!savedStateHandle.contains(KEY_DATE)) {
-            Long day = savedStateHandle.get(KEY_SELECTED_DAY);
-            savedStateHandle.set(KEY_DATE, day == null || day == 0 ? LocalDate.now().toEpochDay() : day);
+        if (!savedStateHandle.contains("date")) {
+            Long day = savedStateHandle.get("selectedDay");
+            savedStateHandle.set("date", day == null || day == 0 ? LocalDate.now().toEpochDay() : day);
         }
 
-        busy = id > 0 && !Boolean.TRUE.equals(savedStateHandle.get(KEY_DRAFT_LOADED));
+        busy = id > 0 && !Boolean.TRUE.equals(savedStateHandle.get("draftLoaded"));
 
         publishState();
 
@@ -72,13 +60,13 @@ public class AddTransactionViewModel extends ViewModel {
                 }
 
 
-                savedStateHandle.set(KEY_DATE, DateUtils.fromMillis(entity.date).toEpochDay());
-                savedStateHandle.set(KEY_AMOUNT, Long.toString(entity.amount));
-                savedStateHandle.set(KEY_TYPE, entity.type);
-                savedStateHandle.set(KEY_CATEGORY, entity.category);
-                savedStateHandle.set(KEY_ACCOUNT, entity.account);
-                savedStateHandle.set(KEY_NOTE, entity.note);
-                savedStateHandle.set(KEY_DRAFT_LOADED, true);
+                savedStateHandle.set("date", DateUtils.fromMillis(entity.date).toEpochDay());
+                savedStateHandle.set("amount", Long.toString(entity.amount));
+                savedStateHandle.set("type", entity.type);
+                savedStateHandle.set("category", entity.category);
+                savedStateHandle.set("account", entity.account);
+                savedStateHandle.set("note", entity.note);
+                savedStateHandle.set("draftLoaded", true);
 
 
                 publishState();
@@ -98,25 +86,25 @@ public class AddTransactionViewModel extends ViewModel {
 
 
     public void onAmountChange(String amount) {
-        update(KEY_AMOUNT, amount);
+        update("amount", amount);
     }
     public void onTypeChange(String type) {
-        update(KEY_TYPE, type);
+        update("type", type);
     }
     public void onCategoryChange(String category) {
-        update(KEY_CATEGORY, category);
+        update("category", category);
     }
     public void onAccountChange(String account) {
-        update(KEY_ACCOUNT, account);
+        update("account", account);
     }
     public void onNoteChange(String note) {
-        update(KEY_NOTE, note);
+        update("note", note);
     }
 
 
 
     public void onDateChange(LocalDate date) {
-        savedStateHandle.set(KEY_DATE, date.toEpochDay());
+        savedStateHandle.set("date", date.toEpochDay());
         publishState();
     }
 
@@ -134,10 +122,10 @@ public class AddTransactionViewModel extends ViewModel {
 
 
     private void publishState() {
-        Long day = savedStateHandle.get(KEY_DATE);
+        Long day = savedStateHandle.get("date");
         state.setValue(new AddTransactionState(id, LocalDate.ofEpochDay(day == null ? LocalDate.now().toEpochDay() : day),
-                value(KEY_AMOUNT, ""), value(KEY_TYPE, TransactionEntity.EXPENSE), value(KEY_CATEGORY, ""),
-                value(KEY_ACCOUNT, ""), value(KEY_NOTE, ""), busy));
+                value("amount", ""), value("type", TransactionEntity.EXPENSE), value("category", ""),
+                value("account", ""), value("note", ""), busy));
     }
 
 
@@ -165,7 +153,7 @@ public class AddTransactionViewModel extends ViewModel {
         }
 
 
-        if (amount <= 0 || amount > MAX_AMOUNT) {
+        if (amount <= 0 || amount > 999_999_999_999L) {
             error(R.string.invalid_amount);
             return;
         }
