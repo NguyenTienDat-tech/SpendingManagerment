@@ -91,8 +91,8 @@ public class StatsViewModel extends ViewModel {
 
         publishState();
 
-        LocalDate start = monthly ? date.withDayOfMonth(1) : date;
-        LocalDate end = monthly ? start.plusMonths(1) : start.plusDays(1);
+        LocalDate start = DateUtils.periodStart(date, monthly);
+        LocalDate end = DateUtils.periodEnd(date, monthly);
         transactions = repository.listTransactions(DateUtils.startOfDay(start), DateUtils.startOfDay(end));
         state.addSource(transactions, list -> { currentTransactions = list; publishState(); });
     }
