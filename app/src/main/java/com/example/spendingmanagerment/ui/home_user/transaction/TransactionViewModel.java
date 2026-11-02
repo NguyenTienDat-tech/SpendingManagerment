@@ -60,15 +60,23 @@ public class TransactionViewModel extends ViewModel {
     public void previousDateClick() {
         onDateChange(monthly ? date.minusMonths(1) : date.minusDays(1));
     }
+
+
     public void nextDateClick() {
         onDateChange(monthly ? date.plusMonths(1) : date.plusDays(1));
     }
+
+
     public void calendarClick() {
         event.setValue(new UiEvent<>(new TransactionEvent(TransactionEvent.Type.SHOW_DATE_PICKER, 0)));
     }
+
+
     public void addTransactionClick() {
         itemClick(0);
     }
+
+
     public void itemClick(long id) {
         event.setValue(new UiEvent<>(new TransactionEvent(TransactionEvent.Type.OPEN_EDITOR, id)));
     }
@@ -77,9 +85,14 @@ public class TransactionViewModel extends ViewModel {
     private void loadTransactions() {
         savedStateHandle.set("day", date.toEpochDay());
         savedStateHandle.set("monthly", monthly);
-        if (transactions != null) state.removeSource(transactions);
+
+        if (transactions != null) {
+            state.removeSource(transactions);
+        }
+
         LocalDate start = monthly ? date.withDayOfMonth(1) : date;
         LocalDate end = monthly ? start.plusMonths(1) : start.plusDays(1);
+
         state.setValue(new TransactionState(date, monthly, Collections.emptyList()));
         transactions = repository.listTransactions(DateUtils.startOfDay(start), DateUtils.startOfDay(end));
         state.addSource(transactions, list -> state.setValue(new TransactionState(date, monthly, list)));
