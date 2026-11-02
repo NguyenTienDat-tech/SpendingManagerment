@@ -9,6 +9,9 @@ import androidx.room.PrimaryKey;
 public class TransactionEntity {
     public static final String INCOME = "INCOME";
     public static final String EXPENSE = "EXPENSE";
+
+
+
     @PrimaryKey(autoGenerate = true)
     public long id;
     // Whole VND avoids floating point rounding in totals.
@@ -19,8 +22,9 @@ public class TransactionEntity {
     @NonNull public String account;
     @NonNull public String note;
 
-    public TransactionEntity(long id, long amount, long date, @NonNull String type,
-                             @NonNull String category, @NonNull String account, @NonNull String note) {
+
+
+    public TransactionEntity(long id, long amount, long date, @NonNull String type, @NonNull String category, @NonNull String account, @NonNull String note) {
         this.id = id;
         this.amount = amount;
         this.date = date;

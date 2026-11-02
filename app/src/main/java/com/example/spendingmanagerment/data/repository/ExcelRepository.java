@@ -21,11 +21,15 @@ public class ExcelRepository {
     public static final String MIME_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     public interface Callback { void onComplete(boolean success, int count); }
 
+
+
     private final Context context;
     private final TransactionDao transactionDao;
     private final TransactionExcel excel;
     private final ExecutorService executor;
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
+
+
 
     @Inject
     public ExcelRepository(@ApplicationContext Context context, TransactionDao transactionDao,
@@ -35,6 +39,8 @@ public class ExcelRepository {
         this.excel = excel;
         this.executor = executor;
     }
+
+
 
     public void exportExcel(Uri uri, Callback callback) {
         executor.execute(() -> {
@@ -50,6 +56,8 @@ public class ExcelRepository {
             complete(callback, success, success ? count : 0);
         });
     }
+
+
 
     public void importExcel(Uri uri, Callback callback) {
         executor.execute(() -> {
@@ -70,12 +78,16 @@ public class ExcelRepository {
         });
     }
 
+
+
     public void clearData(Callback callback) {
         executor.execute(() -> {
             try { complete(callback, true, transactionDao.deleteAllTransactions()); }
             catch (RuntimeException exception) { complete(callback, false, 0); }
         });
     }
+
+
 
     private void complete(Callback callback, boolean success, int count) {
         mainHandler.post(() -> callback.onComplete(success, count));

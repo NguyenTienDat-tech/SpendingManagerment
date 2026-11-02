@@ -17,15 +17,27 @@ import javax.inject.Singleton;
 @InstallIn(SingletonComponent.class)
 public final class DatabaseModule {
     private DatabaseModule() { }
-    @Provides @Singleton
+
+
+
+    @Provides
+    @Singleton
     public static AppDatabase provideAppDatabase(@ApplicationContext Context context) {
         return Room.databaseBuilder(context, AppDatabase.class, "spending_managerment_db").build();
     }
-    @Provides @Singleton
+
+
+
+    @Provides
+    @Singleton
     public static TransactionDao provideTransactionDao(AppDatabase database) {
         return database.transactionDao();
     }
-    @Provides @Singleton
+
+
+
+    @Provides
+    @Singleton
     public static ExecutorService provideDatabaseExecutor() {
         return Executors.newSingleThreadExecutor();
     }
