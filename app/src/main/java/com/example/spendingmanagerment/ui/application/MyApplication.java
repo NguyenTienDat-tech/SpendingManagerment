@@ -9,9 +9,9 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        boolean darkMode = getSharedPreferences("settings", MODE_PRIVATE)
-                .getBoolean("dark_mode", false);
-        AppCompatDelegate.setDefaultNightMode(darkMode
-                ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
+        boolean darkMode = getSharedPreferences("settings", MODE_PRIVATE).getBoolean("dark_mode", false);
+
+        AppCompatDelegate.setDefaultNightMode(darkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
     }
 }

@@ -18,7 +18,9 @@ public final class StatsState {
         this.date = date;
         this.monthly = monthly;
         this.type = type;
+
         Map<String, Long> categories = new LinkedHashMap<>();
+
         long total = 0;
         for (TransactionEntity transaction : transactions) {
             if (!type.equals(transaction.type)) continue;
@@ -26,6 +28,7 @@ public final class StatsState {
             categories.put(transaction.category, (previous == null ? 0 : previous) + transaction.amount);
             total += transaction.amount;
         }
+
         this.categories = Collections.unmodifiableMap(categories);
         this.total = total;
     }

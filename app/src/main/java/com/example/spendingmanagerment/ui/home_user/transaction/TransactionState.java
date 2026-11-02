@@ -17,12 +17,15 @@ public final class TransactionState {
         this.date = date;
         this.monthly = monthly;
         this.transactions = Collections.unmodifiableList(new ArrayList<>(transactions));
+
         long income = 0;
         long expense = 0;
+
         for (TransactionEntity transaction : transactions) {
             if (TransactionEntity.INCOME.equals(transaction.type)) income += transaction.amount;
             else expense += transaction.amount;
         }
+
         this.income = income;
         this.expense = expense;
     }

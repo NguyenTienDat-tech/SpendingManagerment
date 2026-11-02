@@ -27,33 +27,47 @@ public class TransactionFragment extends Fragment {
     private TransactionAdapter adapter;
 
 
-    @Nullable @Override
+
+    @Nullable
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentTransactionBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         viewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
         adapter = new TransactionAdapter(viewModel::itemClick);
+
         binding.transactionList.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.transactionList.setAdapter(adapter);
+
         TransactionState initial = viewModel.getState().getValue();
-        if (initial != null) binding.tabLayout.selectTab(binding.tabLayout.getTabAt(initial.monthly ? 1 : 0));
+        if (initial != null) {
+            binding.tabLayout.selectTab(binding.tabLayout.getTabAt(initial.monthly ? 1 : 0));
+        }
+
         setOnClick();
         stateData();
         eventData();
     }
 
 
+
     private void setOnClick() {
         binding.previousDateBtn.setOnClickListener(view -> viewModel.previousDateClick());
+
         binding.nextDateBtn.setOnClickListener(view -> viewModel.nextDateClick());
+
         binding.currentDate.setOnClickListener(view -> viewModel.calendarClick());
+
         binding.floatingActionButton.setOnClickListener(view -> viewModel.addTransactionClick());
+
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override public void onTabSelected(TabLayout.Tab tab) {
                 viewModel.onPeriodChange(tab.getPosition() == 1);
@@ -67,6 +81,7 @@ public class TransactionFragment extends Fragment {
     }
 
 
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -76,30 +91,45 @@ public class TransactionFragment extends Fragment {
     }
 
 
+
     private void stateData() {
         viewModel.getState().observe(getViewLifecycleOwner(), state -> {
             Locale locale = getResources().getConfiguration().getLocales().get(0);
+
+
+            adapter.submitList(state.transactions);
+
+
             binding.currentDate.setText(DateUtils.formatDate(state.date, state.monthly, locale));
             binding.incomeLbl.setText(DateUtils.formatAmount(state.income, locale));
             binding.expenseLbl.setText(DateUtils.formatAmount(state.expense, locale));
             binding.totalLbl.setText(DateUtils.formatAmount(state.income - state.expense, locale));
-            adapter.submitList(state.transactions);
             binding.emptyState.setVisibility(state.transactions.isEmpty() ? View.VISIBLE : View.GONE);
         });
     }
 
 
+
     private void eventData() {
         viewModel.getEvent().observe(getViewLifecycleOwner(), event -> {
             TransactionEvent effect = event.consume();
-            if (effect == null) return;
+            if (effect == null) {
+                return;
+            }
+
             TransactionState state = viewModel.getState().getValue();
-            if (state == null) return;
+
+            if (state == null) {
+                return;
+            }
+
+
             if (effect.type == TransactionEvent.Type.SHOW_DATE_PICKER) {
                 new DatePickerDialog(requireContext(), (picker, year, month, day) ->
                         viewModel.onDateChange(LocalDate.of(year, month + 1, day)),
                         state.date.getYear(), state.date.getMonthValue() - 1, state.date.getDayOfMonth()).show();
-            } else {
+            }
+            else {
                 Bundle arguments = new Bundle();
                 arguments.putLong("transactionId", effect.transactionId);
                 arguments.putLong("selectedDay", state.date.toEpochDay());

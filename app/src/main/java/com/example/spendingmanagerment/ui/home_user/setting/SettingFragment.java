@@ -21,19 +21,23 @@ public class SettingFragment extends Fragment {
     private FragmentSettingBinding binding;
     private SettingViewModel viewModel;
 
-    @Nullable @Override
+
+
+    @Nullable
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentSettingBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
+
+
+
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(SettingViewModel.class);
 
-
         Locale locale = getResources().getConfiguration().getLocales().get(0);
         binding.tvCurrentLanguage.setText("vi".equals(locale.getLanguage()) ? "Tiếng Việt" : "English");
-
 
         setOnClick();
         stateData();
@@ -41,11 +45,15 @@ public class SettingFragment extends Fragment {
     }
 
 
+
     private void setOnClick() {
         binding.switchDarkMode.setOnCheckedChangeListener((button, checked) -> viewModel.onDarkModeChange(checked));
+
         binding.layoutDarkMode.setOnClickListener(view -> viewModel.onDarkModeChange(!binding.switchDarkMode.isChecked()));
+
         binding.layoutLanguage.setOnClickListener(view -> viewModel.languageClick());
     }
+
 
 
     @Override public void onDestroyView() {
@@ -54,9 +62,11 @@ public class SettingFragment extends Fragment {
     }
 
 
+
     private void stateData() {
         viewModel.getState().observe(getViewLifecycleOwner(), state -> binding.switchDarkMode.setChecked(state.darkMode));
     }
+
 
 
     private void eventData() {

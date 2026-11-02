@@ -23,7 +23,8 @@ public class TransactionAdapter extends ListAdapter<TransactionEntity, Transacti
     }
 
 
-    @NonNull @Override
+    @NonNull
+    @Override
     public TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new TransactionViewHolder(RowTransactionBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
