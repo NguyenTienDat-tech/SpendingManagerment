@@ -49,17 +49,24 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.espresso.core)
+
+
+    //Thư viện hilt
     implementation(libs.hilt.android)
     annotationProcessor(libs.hilt.compiler)
+
+    //Thư viện Room database
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
+
+    //Thư viện navigationview
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.viewmodel.savedstate)
     implementation(libs.recyclerview)
     implementation(libs.mpandroidchart)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
 }

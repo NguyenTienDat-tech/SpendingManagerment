@@ -17,17 +17,25 @@ public class TransactionRepository {
     private final ExecutorService executor;
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
+
+
     @Inject
     public TransactionRepository(TransactionDao transactionDao, ExecutorService executor) {
         this.transactionDao = transactionDao;
         this.executor = executor;
     }
+
+
+
     public LiveData<List<TransactionEntity>> listTransactions(long start, long end) {
         return transactionDao.listTransactions(start, end);
     }
     public LiveData<TransactionEntity> getTransaction(long id) {
         return transactionDao.getTransaction(id);
     }
+
+
+
     public void saveTransaction(TransactionEntity transaction, Callback callback) {
         executor.execute(() -> {
             boolean success;
@@ -39,6 +47,9 @@ public class TransactionRepository {
             mainHandler.post(() -> callback.onComplete(result));
         });
     }
+
+
+
     public void deleteTransaction(long id, Callback callback) {
         executor.execute(() -> {
             boolean success;

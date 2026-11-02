@@ -28,10 +28,15 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private MainViewModel viewModel;
     private PopupMenu moreMenu;
+
+
+
     private final ActivityResultLauncher<String> exportExcelLauncher = registerForActivityResult(
             new ActivityResultContracts.CreateDocument(ExcelRepository.MIME_TYPE), uri -> viewModel.exportExcel(uri));
     private final ActivityResultLauncher<String[]> importExcelLauncher = registerForActivityResult(
             new ActivityResultContracts.OpenDocument(), uri -> viewModel.onImportFileSelected(uri));
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +56,40 @@ public class MainActivity extends AppCompatActivity {
 
         setupController();
         setupBottomNav();
+
+
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+
         stateData();
         eventData();
     }
 
+
+
+    @Override protected void onDestroy() {
+        if (moreMenu != null) {
+            moreMenu.dismiss();
+        }
+        super.onDestroy();
+    }
+
+
+
     private void setupController() {
         NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navHomeFragment);
-        if (host == null) throw new IllegalStateException("Missing NavHostFragment");
+
+        if (host == null) {
+            throw new IllegalStateException("Missing NavHostFragment");
+        }
+
         navController = host.getNavController();
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() != R.id.addTransactionFragment) binding.toolBar.setTitle(destination.getLabel());
         });
     }
+
+
 
     private void setupBottomNav() {
         binding.bottomNav.setItemIconSize(getResources().getDimensionPixelSize(R.dimen.bottom_nav_icon_size));
@@ -76,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
             return NavigationUI.onNavDestinationSelected(item, navController);
         });
     }
+
+
 
     private void showMoreMenu() {
         View anchor = binding.bottomNav.findViewById(R.id.more);
@@ -91,14 +119,22 @@ public class MainActivity extends AppCompatActivity {
         moreMenu.show();
     }
 
+
+
     private void stateData() {
         viewModel.getState().observe(this, state -> binding.bottomNav.getMenu().findItem(R.id.more).setEnabled(!state.busy));
     }
 
+
+
     private void eventData() {
         viewModel.getEvent().observe(this, event -> {
             MainEvent effect = event.consume();
-            if (effect == null) return;
+
+            if (effect == null) {
+                return;
+            }
+
             switch (effect.type) {
                 case EXPORT_PICKER:
                     exportExcelLauncher.launch("Transactions.xlsx");
@@ -121,10 +157,5 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         });
-    }
-
-    @Override protected void onDestroy() {
-        if (moreMenu != null) moreMenu.dismiss();
-        super.onDestroy();
     }
 }

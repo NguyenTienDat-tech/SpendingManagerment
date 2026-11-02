@@ -38,5 +38,7 @@ public class SettingViewModel extends ViewModel {
     }
 
 
-    public void languageClick() { event.setValue(new UiEvent<>(SettingEvent.SHOW_LANGUAGE_PICKER)); }
+    public void languageClick() {
+        event.setValue(new UiEvent<>(SettingEvent.SHOW_LANGUAGE_PICKER));
+    }
 }

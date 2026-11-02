@@ -33,11 +33,13 @@ public class StatsFragment extends Fragment {
 
 
 
-    @Nullable @Override
+    @Nullable
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentStatsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
+
 
 
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -46,12 +48,18 @@ public class StatsFragment extends Fragment {
 
 
         StatsState initial = viewModel.getState().getValue();
-        if (initial != null) binding.tabLayout.selectTab(binding.tabLayout.getTabAt(initial.monthly ? 1 : 0));
+        if (initial != null) {
+            binding.tabLayout.selectTab(binding.tabLayout.getTabAt(initial.monthly ? 1 : 0));
+        }
+
+
         binding.pieChart.getDescription().setEnabled(false);
         binding.pieChart.setNoDataText(getString(R.string.empty_statistics));
         binding.pieChart.getLegend().setWordWrapEnabled(true);
         binding.pieChart.setEntryLabelColor(ContextCompat.getColor(requireContext(), R.color.black));
         binding.pieChart.setDrawHoleEnabled(false);
+
+
         android.content.res.TypedArray colors = requireContext().obtainStyledAttributes(new int[] {android.R.attr.textColorPrimary});
         int textColor = colors.getColor(0, android.graphics.Color.BLACK);
         colors.recycle();
@@ -65,12 +73,18 @@ public class StatsFragment extends Fragment {
     }
 
 
+
     private void setOnClick() {
         binding.previousDateBtn.setOnClickListener(view -> viewModel.previousDateClick());
+
         binding.nextDateBtn.setOnClickListener(view -> viewModel.nextDateClick());
+
         binding.currentDate.setOnClickListener(view -> viewModel.calendarClick());
+
         binding.incomeBtn.setOnClickListener(view -> viewModel.onTypeChange(TransactionEntity.INCOME));
+
         binding.expenseBtn.setOnClickListener(view -> viewModel.onTypeChange(TransactionEntity.EXPENSE));
+
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override public void onTabSelected(TabLayout.Tab tab) { viewModel.onPeriodChange(tab.getPosition() == 1); }
             @Override public void onTabUnselected(TabLayout.Tab tab) { }
@@ -79,23 +93,33 @@ public class StatsFragment extends Fragment {
     }
 
 
+
     @Override public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
 
+
     private void stateData() {
         viewModel.getState().observe(getViewLifecycleOwner(), state -> {
             Locale locale = getResources().getConfiguration().getLocales().get(0);
             binding.currentDate.setText(DateUtils.formatDate(state.date, state.monthly, locale));
+
+
             boolean income = TransactionEntity.INCOME.equals(state.type);
             binding.incomeBtn.setBackgroundResource(income ? R.drawable.income_selector : R.drawable.default_selector);
             binding.expenseBtn.setBackgroundResource(income ? R.drawable.default_selector : R.drawable.expense_selector);
             binding.incomeBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             binding.expenseBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             binding.pieChart.setContentDescription(getString(R.string.stats_total, DateUtils.formatAmount(state.total, locale)));
-            if (state.categories.isEmpty()) { binding.pieChart.clear(); return; }
+
+
+            if (state.categories.isEmpty()) {
+                binding.pieChart.clear(); return;
+            }
+
+
             List<PieEntry> entries = new ArrayList<>();
             for (Map.Entry<String, Long> category : state.categories.entrySet()) {
                 entries.add(new PieEntry(category.getValue().floatValue(), TransactionOptions.categoryLabel(getResources(), category.getKey())));
@@ -117,13 +141,20 @@ public class StatsFragment extends Fragment {
     }
 
 
+
     private void eventData() {
         viewModel.getEvent().observe(getViewLifecycleOwner(), event -> {
-            if (event.consume() == null) return;
+            if (event.consume() == null) {
+                return;
+            }
+
             StatsState state = viewModel.getState().getValue();
-            if (state == null) return;
-            new DatePickerDialog(requireContext(), (picker, year, month, day) -> viewModel.onDateChange(LocalDate.of(year, month + 1, day)),
-                    state.date.getYear(), state.date.getMonthValue() - 1, state.date.getDayOfMonth()).show();
+
+            if (state == null) {
+                return;
+            }
+
+            new DatePickerDialog(requireContext(), (picker, year, month, day) -> viewModel.onDateChange(LocalDate.of(year, month + 1, day)), state.date.getYear(), state.date.getMonthValue() - 1, state.date.getDayOfMonth()).show();
         });
     }
 }

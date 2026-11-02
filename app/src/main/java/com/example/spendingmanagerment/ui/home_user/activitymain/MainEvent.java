@@ -10,10 +10,15 @@ public final class MainEvent {
         CONFIRM_CLEAR,
         MESSAGE
     }
+
+
+
     public final Type type;
     public final Uri uri;
     public final int messageRes;
     public final int count;
+
+
 
     public MainEvent(Type type, Uri uri, int messageRes, int count) {
         this.type = type;

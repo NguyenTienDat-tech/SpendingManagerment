@@ -41,10 +41,17 @@ public class TransactionExcel {
     private static final long MAX_BYTES = 32L * 1024 * 1024;
     private static final int MAX_ROWS = 50_000;
 
+
+
     @Inject public TransactionExcel() { }
 
+
+
     public void write(OutputStream output, List<TransactionEntity> transactions) throws IOException {
-        if (transactions.size() > MAX_ROWS) throw new IOException("Too many rows");
+        if (transactions.size() > MAX_ROWS) {
+            throw new IOException("Too many rows");
+        }
+
         try (ZipOutputStream zip = new ZipOutputStream(new FilterOutputStream(output) {
             @Override public void close() throws IOException { flush(); }
         })) {

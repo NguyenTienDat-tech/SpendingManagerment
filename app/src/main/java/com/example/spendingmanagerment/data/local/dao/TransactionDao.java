@@ -13,20 +13,31 @@ import java.util.List;
 public interface TransactionDao {
     @Query("SELECT * FROM transactions WHERE date >= :start AND date < :end ORDER BY date DESC, id DESC")
     LiveData<List<TransactionEntity>> listTransactions(long start, long end);
+
+
     @Query("SELECT * FROM transactions WHERE id = :id")
     LiveData<TransactionEntity> getTransaction(long id);
+
+
     @Insert
     long insertTransaction(TransactionEntity transaction);
+
+
     @Update
     int updateTransaction(TransactionEntity transaction);
+
+
     @Query("DELETE FROM transactions WHERE id = :id")
     int deleteTransaction(long id);
+
 
     @Query("SELECT * FROM transactions ORDER BY date DESC, id DESC")
     List<TransactionEntity> listAllTransactions();
 
+
     @Upsert
     void upsertTransactions(List<TransactionEntity> transactions);
+
 
     @Query("DELETE FROM transactions")
     int deleteAllTransactions();

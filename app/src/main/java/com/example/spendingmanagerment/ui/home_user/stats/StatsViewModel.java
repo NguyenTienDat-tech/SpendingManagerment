@@ -38,17 +38,26 @@ public class StatsViewModel extends ViewModel {
     public StatsViewModel(TransactionRepository repository, SavedStateHandle savedStateHandle) {
         this.repository = repository;
         this.savedStateHandle = savedStateHandle;
+
         Long day = savedStateHandle.get("day");
         date = day == null ? LocalDate.now() : LocalDate.ofEpochDay(day);
         monthly = Boolean.TRUE.equals(savedStateHandle.get("monthly"));
         type = savedStateHandle.get("type");
-        if (type == null) type = TransactionEntity.EXPENSE;
+
+        if (type == null) {
+            type = TransactionEntity.EXPENSE;
+        }
+
         loadTransactions();
     }
 
 
-    public LiveData<StatsState> getState() { return state; }
-    public LiveData<UiEvent<StatsEvent>> getEvent() { return event; }
+    public LiveData<StatsState> getState() {
+        return state;
+    }
+    public LiveData<UiEvent<StatsEvent>> getEvent() {
+        return event;
+    }
 
 
     public void onPeriodChange(boolean monthly) { this.monthly = monthly; loadTransactions(); }
@@ -73,9 +82,15 @@ public class StatsViewModel extends ViewModel {
     private void loadTransactions() {
         savedStateHandle.set("day", date.toEpochDay());
         savedStateHandle.set("monthly", monthly);
-        if (transactions != null) state.removeSource(transactions);
+
+        if (transactions != null) {
+            state.removeSource(transactions);
+        }
+
         currentTransactions = Collections.emptyList();
+
         publishState();
+
         LocalDate start = monthly ? date.withDayOfMonth(1) : date;
         LocalDate end = monthly ? start.plusMonths(1) : start.plusDays(1);
         transactions = repository.listTransactions(DateUtils.startOfDay(start), DateUtils.startOfDay(end));
