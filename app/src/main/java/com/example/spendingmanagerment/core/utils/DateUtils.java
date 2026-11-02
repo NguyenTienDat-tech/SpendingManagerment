@@ -8,6 +8,13 @@ import java.util.Locale;
 
 public final class DateUtils {
     private DateUtils() { }
+    public static LocalDate periodStart(LocalDate date, boolean monthly) {
+        return monthly ? date.withDayOfMonth(1) : date;
+    }
+    public static LocalDate periodEnd(LocalDate date, boolean monthly) {
+        LocalDate start = periodStart(date, monthly);
+        return monthly ? start.plusMonths(1) : start.plusDays(1);
+    }
     public static long startOfDay(LocalDate date) {
         return date.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
     }
