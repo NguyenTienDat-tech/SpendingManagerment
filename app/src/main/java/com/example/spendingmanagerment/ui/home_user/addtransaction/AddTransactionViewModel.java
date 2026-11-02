@@ -16,6 +16,8 @@ import javax.inject.Inject;
 
 @HiltViewModel
 public class AddTransactionViewModel extends ViewModel {
+    private static final long MAX_AMOUNT = 999_999_999_999L;
+
     private final TransactionRepository repository;
     private final SavedStateHandle savedStateHandle;
 
@@ -153,7 +155,7 @@ public class AddTransactionViewModel extends ViewModel {
         }
 
 
-        if (amount <= 0 || amount > 999_999_999_999L) {
+        if (amount <= 0 || amount > MAX_AMOUNT) {
             error(R.string.invalid_amount);
             return;
         }
