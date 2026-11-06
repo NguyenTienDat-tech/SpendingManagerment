@@ -66,4 +66,6 @@
         <item>Viettel Money</item>
         <item>Khác</item>
     </string-array>
+    <string name="dark_mode_enabled">Đang sử dụng giao diện tối</string>
+    <string name="dark_mode_disabled">Đang sử dụng giao diện sáng</string>
 </resources>

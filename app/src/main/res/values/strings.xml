@@ -58,4 +58,6 @@
     <string-array name="accounts">
         <item>Cash</item><item>Bank</item><item>MB Bank</item><item>Viettel Money</item><item>Other</item>
     </string-array>
+    <string name="dark_mode_enabled">Dark mode is on</string>
+    <string name="dark_mode_disabled">Light mode is on</string>
 </resources>
