@@ -64,10 +64,7 @@ public class SettingFragment extends Fragment {
 
 
     private void stateData() {
-        viewModel.getState().observe(getViewLifecycleOwner(), state -> {
-            binding.switchDarkMode.setChecked(state.darkMode);
-            binding.tvDarkModeDesc.setText(state.darkMode ? R.string.dark_mode_enabled : R.string.dark_mode_disabled);
-        });
+        viewModel.getState().observe(getViewLifecycleOwner(), state -> binding.switchDarkMode.setChecked(state.darkMode));
     }
 
 
