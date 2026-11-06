@@ -1,7 +1,6 @@
 package com.example.spendingmanagerment.ui.home_user.activitymain;
 
 import android.os.Bundle;
-import java.time.LocalDate;
 import android.view.View;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
@@ -138,18 +137,18 @@ public class MainActivity extends AppCompatActivity {
 
             switch (effect.type) {
                 case EXPORT_PICKER:
-                    exportExcelLauncher.launch("Transactions-" + LocalDate.now() + ".xlsx");
+                    exportExcelLauncher.launch("Transactions.xlsx");
                     break;
                 case IMPORT_PICKER:
                     importExcelLauncher.launch(new String[] {ExcelRepository.MIME_TYPE});
                     break;
                 case CONFIRM_IMPORT:
-                    new MaterialAlertDialogBuilder(this).setTitle(R.string.app_import_excel).setMessage(R.string.confirm_import_excel)
+                    new MaterialAlertDialogBuilder(this).setMessage(R.string.confirm_import_excel)
                             .setNegativeButton(R.string.cancel, null)
                             .setPositiveButton(R.string.import_action, (dialog, which) -> viewModel.importExcel(effect.uri)).show();
                     break;
                 case CONFIRM_CLEAR:
-                    new MaterialAlertDialogBuilder(this).setTitle(R.string.app_clear_data).setMessage(R.string.confirm_clear_data)
+                    new MaterialAlertDialogBuilder(this).setMessage(R.string.confirm_clear_data)
                             .setNegativeButton(R.string.cancel, null)
                             .setPositiveButton(R.string.app_delete, (dialog, which) -> viewModel.clearData()).show();
                     break;
