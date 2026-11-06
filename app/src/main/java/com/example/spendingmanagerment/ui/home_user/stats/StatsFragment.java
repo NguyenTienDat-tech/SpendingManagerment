@@ -112,9 +112,7 @@ public class StatsFragment extends Fragment {
             binding.expenseBtn.setBackgroundResource(income ? R.drawable.default_selector : R.drawable.expense_selector);
             binding.incomeBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             binding.expenseBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
-            String totalLabel = getString(R.string.stats_total, DateUtils.formatAmount(state.total, locale));
-            binding.statsTotal.setText(totalLabel);
-            binding.pieChart.setContentDescription(totalLabel);
+            binding.pieChart.setContentDescription(getString(R.string.stats_total, DateUtils.formatAmount(state.total, locale)));
 
 
             if (state.categories.isEmpty()) {

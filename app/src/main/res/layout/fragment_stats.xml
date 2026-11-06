@@ -122,26 +122,11 @@
         app:barrierMargin="10dp"
         app:constraint_referenced_ids="incomeBtn,expenseBtn" />
 
-    <TextView
-        android:id="@+id/statsTotal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
-        android:gravity="center"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/typeFilterBottom"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Total: 350,000 ₫" />
-
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChart"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/statsTotal"
+        app:layout_constraintTop_toBottomOf="@id/typeFilterBottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
